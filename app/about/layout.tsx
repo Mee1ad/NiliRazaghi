@@ -7,7 +7,7 @@ export default function AboutLayout({
 }) {
 	return (
 		<>
-            <Sidebar />
+			{children}
         </>
 	);
 }

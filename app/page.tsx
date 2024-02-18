@@ -11,16 +11,16 @@ export default function Home() {
             <p className="px-56 pt-28">While there is perhaps a province in which the photograph can tell us nothing
                 more than what we see with
                 our own eyes, there is another in which it proves to us how little our eyes permit us to see.</p>
-            <div className="w-1/4 py-10">
+            <div className="w-1/4 pt-10">
                 <Image
                     width="100%"
                     radius="none"
                     alt="Nili Razaghi"
                     src="/home/sign.png"/>
             </div>
-            <div className="flex w-full flex-wrap gap-8 justify-between px-10">
+            <div className="flex w-full flex-wrap gap-8 justify-between px-10 py-10">
                 {
-                    Array.from({ length: 10}).map((_, index) =>
+                    Array.from({ length: 9}).map((_, index) =>
                         <div key={index} className="w-album-image">
                             <Image
                                 key={index}
