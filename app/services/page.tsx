@@ -2,7 +2,7 @@ import {title} from "@/components/primitives";
 import {ThemeSwitch} from "@/components/theme-switch";
 import {CardFooter, Image, Card, Button, Link} from "@nextui-org/react";
 
-export default function NiliPage() {
+export default function ServicesPage() {
     return (
         <div className="flex flex-col items-center py-20 px-10">
             <title className={title()}>Services</title>
