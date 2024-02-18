@@ -9,7 +9,13 @@ module.exports = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '23': '23%',
+        '77': '77%',
+        'album-image': '31%'
+      }
+    },
   },
   darkMode: "class",
   plugins: [nextui()],

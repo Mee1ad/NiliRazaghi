@@ -1,51 +1,41 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code"
-import { button as buttonStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import {Image} from "@nextui-org/react"
 
 export default function Home() {
-	return (
-		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-			<div className="inline-block max-w-lg text-center justify-center">
-				<h1 className={title()}>Make&nbsp;</h1>
-				<h1 className={title({ color: "violet" })}>beautiful&nbsp;</h1>
-				<br />
-				<h1 className={title()}>
-					websites regardless of your design experience.
-				</h1>
-				<h2 className={subtitle({ class: "mt-4" })}>
-					Beautiful, fast and modern React UI library.
-				</h2>
-			</div>
+    return (
+        <div className="flex flex-col text-xl text-gray-500 items-center">
+            <Image
+                width="100%"
+                radius="none"
+                alt="Nili Razaghi"
+                src="/home/slider/01.webp"/>
+            <p className="px-56 pt-28">While there is perhaps a province in which the photograph can tell us nothing
+                more than what we see with
+                our own eyes, there is another in which it proves to us how little our eyes permit us to see.</p>
+            <div className="w-1/4 py-10">
+                <Image
+                    width="100%"
+                    radius="none"
+                    alt="Nili Razaghi"
+                    src="/home/sign.png"/>
+            </div>
+            <div className="flex w-full flex-wrap gap-8 justify-between px-10">
+                {
+                    Array.from({ length: 10}).map((_, index) =>
+                        <div key={index} className="w-album-image">
+                            <Image
+                                key={index}
+                                shadow="sm"
+                                loading="eager"
+                                isBlurred={true}
+                                width="100%"
+                                radius="none"
+                                alt="test"
+                                src={`/home/album/${index}.webp`} />
+                        </div>
+                )}
+            </div>
 
-			<div className="flex gap-3">
-				<Link
-					isExternal
-					href={siteConfig.links.docs}
-					className={buttonStyles({ color: "primary", radius: "full", variant: "shadow" })}
-				>
-					Documentation
-				</Link>
-				<Link
-					isExternal
-					className={buttonStyles({ variant: "bordered", radius: "full" })}
-					href={siteConfig.links.github}
-				>
-					<GithubIcon size={20} />
-					GitHub
-				</Link>
-			</div>
 
-			<div className="mt-8">
-				<Snippet hideSymbol hideCopyButton variant="flat">
-					<span>
-						Get started by editing <Code color="primary">app/page.tsx</Code>
-					</span>
-				</Snippet>
-			</div>
-		</section>
-	);
+        </div>
+    );
 }
