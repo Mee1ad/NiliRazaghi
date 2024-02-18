@@ -43,7 +43,11 @@ export const Sidebar = () => {
                     <PiInstagramLogoLight/>
                     <CiLinkedin/>
                 </footer>
-                <h6 className="text-sm pt-5">With ❤️ by Soheil Ravasani</h6>
+                <h6 className="text-sm pt-5">With ❤️ by
+                    <span className="font-bold ml-1">
+                        Soheil Ravasani
+                    </span>
+                </h6>
             </div>
         </div>
     )
