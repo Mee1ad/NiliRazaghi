@@ -4,6 +4,9 @@ import { siteConfig } from "@/config/site";
 import { fontJosefin} from "@/config/fonts";
 import clsx from "clsx";
 import {Sidebar} from "@/components/sidebar";
+import {Footer} from "@/components/footer";
+import {Navbar} from "@/components/navbar";
+import{Providers} from './providers'
 
 export const metadata: Metadata = {
 	title: {
@@ -32,17 +35,20 @@ export default function RootLayout({
 			<head/>
 			<body
 				className={clsx(
-					"h-full flex",
+					"h-full",
 					fontJosefin.variable
 				)}
 				style={{ fontFamily: "var(--font-josefin)"}}
 			>
-			<Sidebar />
-			<section className="w-77">
-				{ children }
-			</section>
-
-
+			<Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+				<div className="flex flex-wrap">
+					<Sidebar />
+					<section className="w-77 flex-grow">
+						{ children }
+						<Footer />
+					</section>
+				</div>
+			</Providers>
 			</body>
 		</html>
 	);
