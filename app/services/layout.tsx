@@ -7,7 +7,7 @@ export default function NiliLayout({
 }){
     return (
         <>
-            <Sidebar />
+            { children }
         </>
     );
 }
