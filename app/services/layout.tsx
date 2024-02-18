@@ -1,6 +1,6 @@
 import {Sidebar} from "@/components/sidebar";
 
-export default function NiliLayout({
+export default function ServicesLayout({
     children,
 }: {
     children: React.ReactNode;
