@@ -49,3 +49,7 @@ export const fetchPublicImageUrl = (path: string) => {
         .getPublicUrl(path)
     return publicImageUrl.publicUrl
 }
+
+export const fetchFileName = (fileName: string) => {
+    return fileName.split('.')[0]
+}
