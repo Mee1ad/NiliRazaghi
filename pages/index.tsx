@@ -9,12 +9,13 @@ import {
     fetchPublicImageUrl,
     insertImage
 } from "@/services/image.services";
+import {REVALIDATE} from "@/config/consts";
 
 interface HomeProps {
     images: DatabaseImage[]
 }
 
-const Home: FC<HomeProps> = ({images}) => {
+const HomePage: FC<HomeProps> = ({images}) => {
     return (
         <Layout>
             <div className="flex flex-col text-xl text-gray-500 items-center">
@@ -53,7 +54,7 @@ const Home: FC<HomeProps> = ({images}) => {
     );
 }
 
-export default Home;
+export default HomePage
 
 export async function getStaticProps() {
     const pageName = "home"
@@ -61,38 +62,37 @@ export async function getStaticProps() {
     try {
         const bucketImages = await fetchBucketImages(pageName)
         const page = await fetchPageByName(pageName)
-        const dbImages = await fetchPageImages(page.id)
+        const pageImages = await fetchPageImages(page.id)
 
         const images = await Promise.all(bucketImages.map(async (bucketImage) => {
-            let dbImage = dbImages.find(image => (image.bucket_image_id === bucketImage.id))
-            if (!dbImage) {
+            let pageImage = pageImages.find(image => (image.bucket_image_id === bucketImage.id))
+            if (!pageImage) {
 
-                const url = fetchPublicImageUrl(`${pageName}/${bucketImage.name}`)
                 const imageToInsert: DatabaseImage = {
                     alt: bucketImage.name.split('.')[0],
                     bucket_image_id: bucketImage.id,
                     page_id: page.id,
                     order: 99,
-                    url: url
+                    url: fetchPublicImageUrl(`${pageName}/${bucketImage.name}`)
                 }
 
-                dbImage = await insertImage(imageToInsert)
+                pageImage = await insertImage(imageToInsert)
             }
-            return dbImage as DatabaseImage
+            return pageImage as DatabaseImage
         }))
         return {
             props: {
                 images: images
             },
-            revalidate: 60
+            revalidate: REVALIDATE
         }
     } catch (error) {
-        console.error('Failed to fetch data', error)
+        console.error('Failed to fetch home images', error)
         return {
             props: {
                 images: []
             },
-            revalidate: 60
+            revalidate: REVALIDATE
         }
     }
 }
