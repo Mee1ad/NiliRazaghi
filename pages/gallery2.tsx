@@ -2,7 +2,7 @@ import {Card, CardFooter, Image} from "@nextui-org/react";
 import {title} from "@/components/primitives";
 import Layout from "@/components/Layout";
 
-export default function GalleryPage() {
+export default function GalleryPage2() {
     return (
         <Layout>
             <div className="text-center py-20">
