@@ -6,7 +6,7 @@ import {
     fetchBucketImages,
     fetchPageByName,
     fetchPageImages,
-    fetchPublicImageUrl,
+    fetchPublicImageUrl, imageToDbImage,
     insertImage
 } from "@/services/image.services";
 import {REVALIDATE} from "@/config/consts";
@@ -68,13 +68,7 @@ export async function getStaticProps() {
             let pageImage = pageImages.find(image => (image.bucket_image_id === bucketImage.id))
             if (!pageImage) {
 
-                const imageToInsert: DatabaseImage = {
-                    alt: bucketImage.name.split('.')[0],
-                    bucket_image_id: bucketImage.id,
-                    page_id: page.id,
-                    order: 99,
-                    url: fetchPublicImageUrl(`${pageName}/${bucketImage.name}`)
-                }
+                const imageToInsert: DatabaseImage = imageToDbImage(bucketImage, page)
 
                 pageImage = await insertImage(imageToInsert)
             }
