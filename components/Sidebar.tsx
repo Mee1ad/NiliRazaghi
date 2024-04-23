@@ -12,7 +12,8 @@ export const Sidebar = () => {
     const links = [
         {href: "/", text: "Home"},
         {href: "about", text: "About"},
-        {href: "gallery", text: "Gallery"},
+        {href: "galleries", text: "Gallery"},
+        {href: "gallery2", text: "Gallery2"},
         {href: "reels", text: "Reels"},
         {href: "feedback", text: "Feedback"},
         {href: "contact", text: "Contact"}
