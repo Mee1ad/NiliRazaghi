@@ -68,12 +68,12 @@ export const fetchPublicImageUrl = (path: string) => {
 export const fetchFileName = (fileName: string) => {
     return fileName.split('.')[0]
 }
-export const imageToDbImage = (bucketImage, page) => {
+export const imageToDbImage = (bucketImage: BucketImage, page: Page) => {
     return {
         alt: bucketImage.name.split('.')[0],
         bucket_image_id: bucketImage.id,
         page_id: page.id,
         order: 99,
-        url: fetchPublicImageUrl(`${page.name}/${bucketImage.name}`)
+        url: fetchPublicImageUrl(`galleries/${page.name}/${bucketImage.name}`)
     }
 }
