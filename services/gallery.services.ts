@@ -14,6 +14,7 @@ import {DatabaseImage} from "@/interface/database_image";
 import GalleryPage from "@/pages/galleries";
 import {BucketImage} from "@/interface/image.interface";
 import {Page} from "@/interface";
+import galleries from "@/pages/galleries";
 
 
 export const populateGalleryCover = async (bucketFile: BucketImage, galleryId: number) => {
@@ -34,34 +35,16 @@ export const populateGalleryCover = async (bucketFile: BucketImage, galleryId: n
 }
 
 export const populateGalleries = async (bucketGalleries: BucketImage[]) => {
-    const page_name = 'galleries'
+    const pageName = 'galleries'
     const mainGalleryId = await fetchPageId('gallery')
+    await removeDeletedGalleriesFromDb(bucketGalleries, mainGalleryId)
     await Promise.all(bucketGalleries.map(async (bucketFile) => {
         if (bucketFile.id) {
-            const path = page_name + '/' + bucketFile.name.replace('.jpg', '')
+            const path = pageName + '/' + bucketFile.name.replace('.jpg', '')
             const galleryName = path.replace('galleries/', '')
             await submitGalleryInDBIfNotExist(galleryName, mainGalleryId)
-            const bucketImages = await fetchBucketImages(path)
-            const gallery = await fetchPageByName(galleryName)
             await populateGalleryCover(bucketFile, mainGalleryId)
-            const galleryImages = await fetchPageImages(gallery.id)
-
-            const imagesToInsert: DatabaseImage[] = []
-            const images = bucketImages?.map((bucketImage) => {
-                let galleryImage =
-                    galleryImages.find((image) => image.bucket_image_id === bucketImage.id)
-                if (!galleryImage) {
-                    galleryImage = imageToDbImage(bucketImage, path)
-                    galleryImage.page_id = gallery.id
-                    imagesToInsert.push(galleryImage)
-                }
-                return galleryImage
-            })
-            if (images) {
-                await insertImages(imagesToInsert)
-            }
         }
-        // await Promise.all(images)
     }))
 }
 
@@ -121,4 +104,73 @@ export const fetchPageId = async (pageName: string) => {
         throw pageError
     }
     return page[0]?.id
+}
+
+export const populateGalleryImages = async (gallery: Page, path: string) => {
+    const bucketImages = await fetchBucketImages(path)
+    const galleryImages = await fetchPageImages(gallery.id)
+    await removeDeletedImagesFromDB(galleryImages, bucketImages)
+    const imagesToInsert: DatabaseImage[] = []
+    const images = bucketImages?.map((bucketImage) => {
+        let galleryImage =
+            galleryImages.find((image) => image.bucket_image_id === bucketImage.id)
+        if (!galleryImage) {
+            galleryImage = imageToDbImage(bucketImage, gallery)
+            galleryImage.page_id = gallery.id
+            imagesToInsert.push(galleryImage)
+        }
+        return galleryImage
+    })
+    if (images) {
+        await insertImages(imagesToInsert)
+    }
+}
+
+export const removeDeletedImagesFromDB = async (dbImages: DatabaseImage[], bucketImages: BucketImage[]) => {
+    dbImages.map(async (dbImage) => {
+        const isImageExist = bucketImages.some((bucketImage) => bucketImage.id === dbImage.bucket_image_id);
+        if (!isImageExist) {
+            let {data, error} = await supabase
+                .from(IMAGE_TABLE)
+                .delete()
+                .match({id: dbImage.id})
+            if (error) throw error
+        }
+    })
+}
+
+export const fetchPages = async (parentId: number) => {
+    const {data: page, error} = await supabase
+        .from(PAGE_TABLE)
+        .select("*")
+        .eq("parent_id", parentId)
+    if (error) throw error
+    return page
+}
+export const removeDeletedGalleriesFromDb = async (bucketGalleries: BucketImage[], pageId: number) => {
+    const dbGalleries = await fetchPages(pageId)
+    dbGalleries?.map(async (dbGallery) => {
+        let fileExists = bucketGalleries.some((bucketGallery) =>
+            bucketGallery.name.split(".")[0] === dbGallery.name)
+        if (!fileExists) {
+            await removeGalleryImagesFromDB(dbGallery.id)
+            await removeGalleryFromDB(dbGallery.id)
+        }
+    })
+}
+
+export const removeGalleryImagesFromDB = async (galleyId: number) => {
+    let {data: images, error: imagesError} = await supabase
+        .from(IMAGE_TABLE)
+        .delete()
+        .match({page_id: galleyId})
+    if (imagesError) throw imagesError
+}
+
+export const removeGalleryFromDB = async (galleryId: number) => {
+    let {data: gallery, error: galleryError} = await supabase
+        .from(PAGE_TABLE)
+        .delete()
+        .match({id: galleryId})
+    if (galleryError) throw galleryError
 }
