@@ -1,4 +1,4 @@
-export interface BucketImage {
+export interface BucketFile {
     name: string,
     id: string,
     updated_at: string,
