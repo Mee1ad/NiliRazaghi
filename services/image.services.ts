@@ -2,7 +2,7 @@ import {DatabaseImage} from "@/interface/database_image";
 import supabase from "@/config/supabase_service";
 import {IMAGE_BUCKET, IMAGE_TABLE, PAGE_TABLE} from "@/config/consts";
 import {Page} from "@/interface";
-import {BucketImage, BucketDirectory} from "@/interface/image.interface";
+import {BucketFile, BucketDirectory} from "@/interface/image.interface";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 
@@ -26,7 +26,7 @@ export const insertImage = async (image: DatabaseImage) => {
     return image
 }
 
-export const fetchBucketImages = async (pageName: Page["name"]) => {
+export const fetchBucketFiles = async (pageName: Page["name"]) => {
     let {data: bucketImages, error: bucketImagesError} = await supabase
         .storage
         .from(IMAGE_BUCKET)
@@ -34,9 +34,9 @@ export const fetchBucketImages = async (pageName: Page["name"]) => {
     if (bucketImagesError) {
         throw bucketImagesError
     }
-    const filteredBucketImages: BucketImage[] | undefined = bucketImages?.filter(image => image.metadata != null)
+    const filteredBucketFiles: BucketFile[] | undefined = bucketImages?.filter(image => image.metadata != null)
 
-    return filteredBucketImages as BucketImage[]
+    return filteredBucketFiles as BucketFile[]
 }
 export const fetchPageImages = async (pageId: Page["id"]) => {
     const {data: dbImage, error: dbImageError} = await supabase
@@ -68,7 +68,7 @@ export const fetchPublicImageUrl = (path: string) => {
 export const fetchFileName = (fileName: string) => {
     return fileName.split('.')[0]
 }
-export const imageToDbImage = (bucketImage: BucketImage, page: Page) => {
+export const imageToDbImage = (bucketImage: BucketFile, page: Page) => {
     return {
         alt: bucketImage.name.split('.')[0],
         bucket_image_id: bucketImage.id,
