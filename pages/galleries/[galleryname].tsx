@@ -12,20 +12,22 @@ import {Page} from "@/interface";
 const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
     return (
         <Layout>
-            <div className="flex w-full flex-wrap gap-8 justify-between px-10 py-10">
-                {
-                    images && images.map((image) =>
-                        <div key={image.bucket_image_id} className="w-album-image">
-                            <Image
-                                shadow="sm"
-                                loading="eager"
-                                isBlurred={true}
-                                width="100%"
-                                radius="none"
-                                alt={image?.alt}
-                                src={image.url}/>
-                        </div>)
-                }
+            <div className="text-center py-20">
+                <section className="columns-1 sm:columns-2 md:columns-3 gap-10 p-10">
+                    {
+                        images && images.map((image) =>
+                            <div key={image.bucket_image_id} className="mb-10">
+                                <Image
+                                    shadow="sm"
+                                    loading="eager"
+                                    isBlurred={true}
+                                    width="100%"
+                                    radius="none"
+                                    alt={image?.alt}
+                                    src={image.url}/>
+                            </div>)
+                    }
+                </section>
             </div>
         </Layout>
     );
