@@ -6,17 +6,21 @@ import { CiLinkedin } from "react-icons/ci";
 // import {fontjosefin} from "@/config/fonts";
 import clsx from "clsx";
 import {ThemeSwitch} from "@/components/theme-switch";
+import {useRouter} from "next/router";
 
 
 export const Sidebar = () => {
+
+    const router = useRouter()
+    console.log('router.pathname', router.pathname)
+
     const links = [
         {href: "/", text: "Home"},
-        {href: "about", text: "About"},
-        {href: "galleries", text: "Gallery"},
-        {href: "gallery2", text: "Gallery2"},
-        {href: "reels", text: "Reels"},
-        {href: "feedback", text: "Feedback"},
-        {href: "contact", text: "Contact"}
+        {href: "/about", text: "About"},
+        {href: "/galleries", text: "Gallery"},
+        {href: "/reels", text: "Reels"},
+        {href: "/feedback", text: "Feedback"},
+        {href: "/contact", text: "Contact"}
     ]
     return (
         <div className="w-23 z-50">
@@ -32,7 +36,9 @@ export const Sidebar = () => {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="border-b-1.5 leading-[3]"
+                            className={clsx("border-b-1.5 leading-[3] text-gray-500 hover:text-black" +
+                                " transition-colors duration-200",
+                                {"text-black": router.pathname === link.href})}
                             color="foreground"
                         >
                             {link.text}
