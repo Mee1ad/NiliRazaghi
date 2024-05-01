@@ -35,8 +35,8 @@ const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
 
 export default GalleryPage;
 
-export async function getStaticProps(context: NextPageContext) {
-    const galleryName: string = context.params.galleryname
+export async function getStaticProps(context: GetStaticPropsContext) {
+    const galleryName: string = context.params?.galleryname as string
     const page: Page = await fetchPageByName(galleryName)
     await populateGalleryImages(page, 'galleries/' + galleryName)
 
