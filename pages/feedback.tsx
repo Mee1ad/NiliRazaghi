@@ -4,7 +4,7 @@ import {MdCameraAlt} from "react-icons/md";
 import {Input} from "@nextui-org/input";
 import Layout from "@/components/Layout";
 import {
-    fetchBucketImages,
+    fetchBucketFiles,
     fetchFileName,
     fetchPageByName,
     fetchPageImages,
@@ -63,26 +63,26 @@ export async function getStaticProps() {
     const pageName = "feedback"
 
     try {
-        const bucketImages = await fetchBucketImages(pageName)
+        const BucketFiles = await fetchBucketFiles(pageName)
         const page = await fetchPageByName(pageName)
         const pageImages = await fetchPageImages(page.id)
-        const uploadBucketImages = bucketImages.map(
-            async (bucketImage) => {
+        const uploadBucketFiles = BucketFiles.map(
+            async (bucketFile) => {
                 let dbImage = pageImages
-                    .find((pageImage) => pageImage.bucket_image_id === bucketImage.id)
+                    .find((pageImage) => pageImage.bucket_image_id === bucketFile.id)
                 if (!dbImage) {
                     const dbImage = {
-                        alt: fetchFileName(bucketImage.name),
-                        bucket_image_id: bucketImage.id,
+                        alt: fetchFileName(bucketFile.name),
+                        bucket_image_id: bucketFile.id,
                         page_id: page.id,
                         order: 99,
-                        url: fetchPublicImageUrl(`${pageName}/${bucketImage.name}`)
+                        url: fetchPublicImageUrl(`${pageName}/${bucketFile.name}`)
                     }
                     await insertImage(dbImage)
                 }
                 return dbImage as DatabaseImage
             })
-        await Promise.all(uploadBucketImages)
+        await Promise.all(uploadBucketFiles)
         const feedbacks = await fetchFeedbacks()
         return {
             props: {
