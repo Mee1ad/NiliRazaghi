@@ -3,7 +3,7 @@ import {FC} from "react"
 import Layout from "@/components/Layout"
 import {DatabaseImage} from "@/interface/database_image";
 import {
-    fetchBucketImages,
+    fetchBucketFiles,
     fetchPageByName,
     fetchPageImages,
     fetchPublicImageUrl, imageToDbImage,
@@ -60,15 +60,15 @@ export async function getStaticProps() {
     const pageName = "home"
 
     try {
-        const bucketImages = await fetchBucketImages(pageName)
+        const BucketFiles = await fetchBucketFiles(pageName)
         const page = await fetchPageByName(pageName)
         const pageImages = await fetchPageImages(page.id)
 
-        const images = await Promise.all(bucketImages.map(async (bucketImage) => {
-            let pageImage = pageImages.find(image => (image.bucket_image_id === bucketImage.id))
+        const images = await Promise.all(BucketFiles.map(async (bucketFile) => {
+            let pageImage = pageImages.find(image => (image.bucket_image_id === bucketFile.id))
             if (!pageImage) {
 
-                const imageToInsert: DatabaseImage = imageToDbImage(bucketImage, page)
+                const imageToInsert: DatabaseImage = imageToDbImage(bucketFile, page)
 
                 pageImage = await insertImage(imageToInsert)
             }
