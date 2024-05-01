@@ -1,8 +1,8 @@
 import {FC} from "react";
 import {REVALIDATE} from "@/config/consts";
 import {fetchBucketGalleries, fetchGalleries, fetchGalleryPage, populateGalleries} from '@/services/gallery.services'
-import {fetchBucketImages, fetchPageImages} from "@/services/image.services";
-import {BucketImage} from "@/interface/image.interface";
+import {fetchBucketFiles, fetchPageImages} from "@/services/image.services";
+import {BucketFile} from "@/interface/image.interface";
 import {title} from "@/components/primitives";
 import {Button, Card, CardBody, CardFooter, CardHeader, Image} from "@nextui-org/react";
 import Layout from "@/components/Layout";
@@ -13,8 +13,7 @@ const GalleryPage: FC<{ galleries: DatabaseImage[] }> = ({galleries}) => {
     return (
         <Layout>
             <div className="text-center py-20">
-                <title className={title()}>Gallery</title>
-                <h1 className="text-3xl font-bold">Portfolio</h1>
+                <title className={title()}>Portfolio</title>
                 <section className="columns-1 sm:columns-2 md:columns-3 gap-10 p-10">
                     {
                         galleries.map((gallery) =>
@@ -85,7 +84,7 @@ export default GalleryPage
 
 export async function getStaticProps() {
     const pageName = "galleries"
-    const bucketGalleries: BucketImage[] | [] = await fetchBucketImages(pageName)
+    const bucketGalleries: BucketFile[] | [] = await fetchBucketFiles(pageName)
     await populateGalleries(bucketGalleries)
     const galleryPage = await fetchGalleryPage()
     return {
