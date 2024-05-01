@@ -19,38 +19,6 @@ const GalleryPage: FC<{ galleries: DatabaseImage[] }> = ({galleries}) => {
                         galleries.map((gallery) =>
                             <div key={gallery.bucket_image_id} className="mb-10">
                                 <NextLink href={`/galleries/${gallery.alt}`}>
-                                    {/*<Card className="py-4">*/}
-                                    {/*    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">*/}
-                                    {/*        <h4 className="font-bold text-large">{gallery.alt}</h4>*/}
-                                    {/*    </CardHeader>*/}
-                                    {/*    <CardBody className="overflow-visible py-2">*/}
-                                    {/*        <Image*/}
-                                    {/*            shadow="sm"*/}
-                                    {/*            loading="eager"*/}
-                                    {/*            isBlurred={true}*/}
-                                    {/*            width="100%"*/}
-                                    {/*            radius="none"*/}
-                                    {/*            alt="test"*/}
-                                    {/*            src={gallery.url}/>*/}
-                                    {/*    </CardBody>*/}
-                                    {/*</Card>*/}
-
-                                    {/*<Card shadow="sm" isPressable onPress={() => console.log("item pressed")}>*/}
-                                    {/*    <CardBody className="overflow-visible p-0">*/}
-                                    {/*        <Image*/}
-                                    {/*                shadow="sm"*/}
-                                    {/*                loading="eager"*/}
-                                    {/*                isBlurred={true}*/}
-                                    {/*                width="100%"*/}
-                                    {/*                radius="none"*/}
-                                    {/*                alt="test"*/}
-                                    {/*                src={gallery.url}/>*/}
-                                    {/*    </CardBody>*/}
-                                    {/*    <CardFooter className="text-small justify-between">*/}
-                                    {/*        <b>{gallery.alt}</b>*/}
-                                    {/*        <p className="text-default-500">3.00$</p>*/}
-                                    {/*    </CardFooter>*/}
-                                    {/*</Card>*/}
 
                                     <Card className="col-span-12 sm:col-span-4 h-[300px]">
                                         <CardHeader className="absolute z-10 top-1 flex-col !items-start">
