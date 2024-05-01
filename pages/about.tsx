@@ -6,8 +6,11 @@ export default function AboutPage() {
     return (
         <Layout>
             <div className="flex flex-col gap-8 px-10">
-                <title className={title()}>About</title>
-                <h1 className="text-3xl font-bold text-center pt-20">About Me</h1>
+                <div className="text-center pt-20">
+                    <title className={title() + " text-small !important"}>About Me</title>
+                </div>
+
+                {/*<h1 className="text-3xl font-bold text-center pt-20">About Me</h1>*/}
                 <Image
                     width="100%"
                     radius="none"
