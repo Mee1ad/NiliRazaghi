@@ -1,12 +1,12 @@
-import {Link} from "@nextui-org/link";
 import {siteConfig} from "@/config/site";
-import { PiTelegramLogoThin } from "react-icons/pi";
-import { PiInstagramLogoLight } from "react-icons/pi";
-import { CiLinkedin } from "react-icons/ci";
+import {PiTelegramLogoThin} from "react-icons/pi";
+import {PiInstagramLogoLight} from "react-icons/pi";
+import {CiLinkedin} from "react-icons/ci";
 // import {fontjosefin} from "@/config/fonts";
 import clsx from "clsx";
 import {ThemeSwitch} from "@/components/theme-switch";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 
 export const Sidebar = () => {
