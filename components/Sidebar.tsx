@@ -32,18 +32,25 @@ export const Sidebar = () => {
                     {/*<ThemeSwitch/>*/}
                 </section>
                 <section className="flex-col flex text-left">
-                    {links.map(link => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={clsx("border-b-1.5 leading-[3] text-gray-500 hover:text-black" +
-                                " transition-colors duration-200",
-                                {"text-black": router.pathname === link.href})}
-                            color="foreground"
-                        >
-                            {link.text}
-                        </Link>
-                    ))}
+                    {links.map(link => {
+                        console.log(router.pathname, link.href, router.pathname === link.href)
+                        return (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={clsx(
+                                    "border-b-1.5 leading-[3]",
+                                    "transition-colors duration-200",
+                                    {
+                                        "text-gray-500 hover:text-black": router.pathname !== link.href,
+                                        "text-black": router.pathname === link.href
+                                    })}
+                                color="foreground"
+                            >
+                                {link.text}
+                            </Link>
+                        );
+                    })}
                 </section>
                 <footer className="flex text-3xl mt-20 justify-center gap-2">
                     <PiTelegramLogoThin/>
