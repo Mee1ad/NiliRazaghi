@@ -1,7 +1,7 @@
 import {DatabaseImage} from "@/interface/database_image";
 import supabase from "@/config/supabase_service";
 import {IMAGE_BUCKET, IMAGE_TABLE, PAGE_TABLE} from "@/config/consts";
-import {Page} from "@/interface";
+import {Page} from "@/interface/page.interface";
 import {BucketFile, BucketDirectory} from "@/interface/image.interface";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;

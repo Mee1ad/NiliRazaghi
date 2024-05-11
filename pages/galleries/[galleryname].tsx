@@ -7,7 +7,8 @@ import {fetchPageByName, fetchPageImages} from "@/services/image.services";
 import {fetchPageId, populateGalleryImages} from "@/services/gallery.services";
 import Layout from "@/components/Layout";
 import {Image} from "@nextui-org/react";
-import {Page} from "@/interface";
+import {Page} from "@/interface/page.interface";
+
 
 const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
     return (
@@ -54,7 +55,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export async function getStaticPaths() {
     return {
         paths: [
-            '/galleries/kid',
+            '/galleries/Commercial',
+            '/galleries/Self%20Portrait',
+            '/galleries/Portrait%20of%20people',
         ],
         fallback: true,
     }

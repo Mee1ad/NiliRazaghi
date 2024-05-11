@@ -13,7 +13,7 @@ import {type FileObject} from "@supabase/storage-js";
 import {DatabaseImage} from "@/interface/database_image";
 import GalleryPage from "@/pages/galleries";
 import {BucketFile} from "@/interface/image.interface";
-import {Page} from "@/interface";
+import {Page} from "@/interface/page.interface";
 import galleries from "@/pages/galleries";
 
 
