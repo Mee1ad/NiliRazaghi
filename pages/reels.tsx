@@ -57,7 +57,6 @@ export async function getStaticProps() {
     await removeDeletedReelsFromDB(dbReels, bucketReels)
     await insertReels(bucketReels, dbReels, bucketReelsCovers)
     const reels = await fetchDBReels();
-    console.log('reels', dbReels)
 
     return {
         props: {
