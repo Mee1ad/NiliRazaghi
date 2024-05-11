@@ -29,7 +29,7 @@ export default function AboutPage() {
                         and now serving as the media director of Royal Beauty Clinic and also works as a freelance
                         photographer.
 
-                        Nili's love for her craft shines through in her cinematic photographs, which blend artistry and
+                        Nili&apos;s love for her craft shines through in her cinematic photographs, which blend artistry and
                         technical skill to create images. Her relentless pursuit of excellence drives her to
                         continuously
                         improve her skills and learn something new with every photography session.
