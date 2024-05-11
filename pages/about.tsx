@@ -1,8 +1,14 @@
 import Layout from "@/components/Layout";
 import {title} from "@/components/primitives";
 import {Image} from "@nextui-org/react";
+import {fetchPageImage} from "@/services/image.services";
+import {REVALIDATE} from "@/config/consts";
+import {DatabaseImage} from "@/interface/database_image";
+import {FC} from "react";
 
-export default function AboutPage() {
+
+const AboutPage: FC<{ image: DatabaseImage }> = ({image}) => {
+    console.log(image)
     return (
         <Layout>
             <div className="flex flex-col gap-8 px-10">
@@ -14,8 +20,8 @@ export default function AboutPage() {
                 <Image
                     width="100%"
                     radius="none"
-                    alt="Nili Razaghi"
-                    src="/about/01.webp"
+                    alt={image.alt}
+                    src={image.url}
                 />
                 <div className="flex flex-col gap-2">
                     <span className="text-sm text-gray-500">PHOTOGRAPHER</span>
@@ -46,4 +52,16 @@ export default function AboutPage() {
             </div>
         </Layout>
     );
+}
+
+export default AboutPage
+
+export async function getStaticProps() {
+    const aboutImage = await fetchPageImage("about_slider")
+    return {
+        props: {
+            image: aboutImage
+        },
+        revalidate: REVALIDATE
+    }
 }
