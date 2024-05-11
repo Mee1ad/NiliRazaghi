@@ -6,6 +6,9 @@ import {REVALIDATE} from "@/config/consts";
 import {fetchDBReels, insertReels, removeDeletedReelsFromDB} from "@/services/reels.services";
 import {DBReels} from "@/interface/reels.interface";
 import {FC} from "react";
+import {Image} from "@nextui-org/react";
+import clsx from "clsx";
+import {FaPlay} from "react-icons/fa";
 
 const DynamicReactPlayer = dynamic(
     () => import('react-player'),
@@ -17,24 +20,31 @@ const ReelsPage: FC<{ reels: DBReels[] }> = ({reels}) => {
         <Layout>
             <div className="text-center py-20">
                 <title className={title()}>Reels</title>
-                <section className="columns-1 sm-columns-2 md:columns-4 gap-10 p-10 ">
+                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 p-10 ">
                     {
                         reels.map((reel) => (
-                            <div className="mb-10 shadow-md relative pt-[177.25%]" key={reel.bucket_id}>
-                                <DynamicReactPlayer width="100%" height="100%"
-                                                    playing controls disablepictureinpicture
-                                                    light={<img src={reel.cover_url} alt={reel.alt}/>}
-                                                    url={[{src: reel.video_url, type: 'video/webm'}]}
-                                                    className='absolute top-0 left-0'
-                                                    config={{
-                                                        file: {
-                                                            attributes: {
-                                                                controlsList: 'nodownload noplaybackrate disablepictureinpicture noremoteplayback ',
-                                                                poster: reel.cover_url
-                                                            },
-                                                            forceHLS: true
-                                                        }
-                                                    }}
+                            <div className="mb-10 relative pt-[177.25%] rounded-xl" key={reel.bucket_id}>
+                                <DynamicReactPlayer
+                                    width="100%" height="100%"
+                                    playing controls disablepictureinpicture
+                                    light={<Image shadow="sm" isBlurred src={reel.cover_url} alt={reel.alt}/>}
+                                    url={[{src: reel.video_url, type: 'video/webm'}]}
+                                    className={clsx(
+                                        'absolute top-0 left-0',
+                                        '[&_video]:overflow-hidden [&_video]:rounded-2xl [&_video]:shadow-black/5 [&_video]:shadow-lg',
+                                        '[&_.react-player__shadow]:z-20'
+                                    )}
+                                    playIcon={<FaPlay
+                                        className="z-20 absolute text-4xl text-white opacity-70"/>}
+                                    config={{
+                                        file: {
+                                            attributes: {
+                                                controlsList: 'nodownload noplaybackrate disablepictureinpicture noremoteplayback ',
+                                                poster: reel.cover_url
+                                            },
+                                            forceHLS: true
+                                        }
+                                    }}
                                 />
                             </div>
                         ))

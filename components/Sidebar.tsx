@@ -29,9 +29,9 @@ export const Sidebar = () => {
                 <section className="flex flex-col items-center mb-14">
                     <h1 className="text-3xl font-bold sticky top-0">Nili Razaghi</h1>
                     <h3>Photographer</h3>
-                    <ThemeSwitch/>
+                    {/*<ThemeSwitch/>*/}
                 </section>
-                <section className="flex-col flex">
+                <section className="flex-col flex text-left">
                     {links.map(link => (
                         <Link
                             key={link.href}
@@ -50,11 +50,6 @@ export const Sidebar = () => {
                     <PiInstagramLogoLight/>
                     <CiLinkedin/>
                 </footer>
-                <h6 className="text-sm pt-5">With ❤️ by
-                    <span className="font-bold ml-1">
-                        Soheil Ravasani
-                    </span>
-                </h6>
             </div>
         </div>
     )
