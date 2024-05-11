@@ -4,26 +4,28 @@ import Layout from "@/components/Layout"
 import {DatabaseImage} from "@/interface/database_image";
 import {
     fetchBucketFiles,
-    fetchPageByName,
+    fetchPageByName, fetchPageImage,
     fetchPageImages,
     fetchPublicImageUrl, imageToDbImage,
     insertImage
 } from "@/services/image.services";
-import {REVALIDATE} from "@/config/consts";
+import {IMAGE_TABLE, PAGE_TABLE, REVALIDATE} from "@/config/consts";
+import supabase from "@/config/supabase_service";
 
 interface HomeProps {
     images: DatabaseImage[]
+    slider: DatabaseImage
 }
 
-const HomePage: FC<HomeProps> = ({images}) => {
+const HomePage: FC<HomeProps> = ({images, slider}) => {
     return (
         <Layout>
             <div className="flex flex-col text-xl text-gray-500 items-center">
                 <Image
                     width="100%"
                     radius="none"
-                    alt="Nili Razaghi"
-                    src="/home/slider/01.webp"/>
+                    alt={slider.alt}
+                    src={slider.url}/>
                 <p className="px-56 pt-28">While there is perhaps a province in which the photograph can tell us nothing
                     more than what we see with
                     our own eyes, there is another in which it proves to us how little our eyes permit us to see.</p>
@@ -58,6 +60,7 @@ export default HomePage
 
 export async function getStaticProps() {
     const pageName = "home"
+    const slider = await fetchPageImage("home_slider")
 
     try {
         const BucketFiles = await fetchBucketFiles(pageName)
@@ -76,7 +79,8 @@ export async function getStaticProps() {
         }))
         return {
             props: {
-                images: images
+                images: images,
+                slider: slider
             },
             revalidate: REVALIDATE
         }
