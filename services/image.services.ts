@@ -77,3 +77,12 @@ export const imageToDbImage = (bucketImage: BucketFile, page: Page) => {
         url: fetchPublicImageUrl(`galleries/${page.name}/${bucketImage.name}`)
     }
 }
+
+export const fetchPageImage = async (pageName: Page["name"]) => {
+    const {data: slider, error} = await supabase
+        .from(PAGE_TABLE)
+        .select("*, nili_image:image_id (*)")
+        .eq("name", pageName)
+    if (error) throw error;
+    return slider[0].nili_image as DatabaseImage
+}
