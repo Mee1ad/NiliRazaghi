@@ -7,8 +7,7 @@ import {DatabaseImage} from "@/interface/database_image";
 import {FC} from "react";
 
 
-const AboutPage: FC<{ image: DatabaseImage }> = ({image}) => {
-    console.log(image)
+const AboutPage: FC = () => {
     return (
         <Layout>
             <div className="flex flex-col gap-8 px-10">
@@ -20,8 +19,8 @@ const AboutPage: FC<{ image: DatabaseImage }> = ({image}) => {
                 <Image
                     width="100%"
                     radius="none"
-                    alt={image.alt}
-                    src={image.url}
+                    alt="a_girl_with_book"
+                    src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/about_slider.webp"
                 />
                 <div className="flex flex-col gap-2">
                     <span className="text-sm text-gray-500">PHOTOGRAPHER</span>
@@ -55,13 +54,3 @@ const AboutPage: FC<{ image: DatabaseImage }> = ({image}) => {
 }
 
 export default AboutPage
-
-export async function getStaticProps() {
-    const aboutImage = await fetchPageImage("about_slider")
-    return {
-        props: {
-            image: aboutImage
-        },
-        revalidate: REVALIDATE
-    }
-}
