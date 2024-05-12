@@ -8,7 +8,7 @@ import {ThemeSwitch} from "@/components/theme-switch";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {accordion, Accordion, AccordionItem} from "@nextui-org/react";
-import {useCallback} from "react";
+import {useCallback, useEffect} from "react";
 
 
 export const Sidebar = () => {
@@ -37,6 +37,12 @@ export const Sidebar = () => {
         router.push(route)
     }, [router])
 
+    useEffect(() => {
+        links.filter(link => link.items).map(link => {
+            router.prefetch(link.href)
+        })
+    }, [links, router])
+
     return (
         <div className="w-23 z-50">
             <div className="px-8 py-32 w-23 h-full fixed z-50 text-center"
@@ -64,6 +70,7 @@ export const Sidebar = () => {
                         if (link.items === undefined) {
                             return (
                                 <Link
+                                    prefetch
                                     key={link.href}
                                     href={link.href}
                                     className={clsx(
@@ -83,7 +90,7 @@ export const Sidebar = () => {
                             return (
                                 // <Accordion key={link.href} isCompact defaultExpandedKeys={["1"]}
                                 <Accordion key={link.href} isCompact onSelectionChange={navigateTo(link.href)}
-                                           selectedKeys={isActive ? "all" : undefined}
+                                           selectedKeys={isActive ? "all" : []}
                                            className={clsx("px-0 py-1",
                                                {
                                                    "[&_span]:text-gray-500 border-b-1.5": !isActive,
@@ -98,6 +105,7 @@ export const Sidebar = () => {
                                                 const isActive = href === pathname
                                                 return (
                                                     <Link
+                                                        prefetch
                                                         key={item.href}
                                                         href={item.href}
                                                         className={clsx(
