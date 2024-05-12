@@ -21,7 +21,6 @@ const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
                         images && images.map((image) =>
                             <div key={image.bucket_image_id} className="mb-10">
                                     <Image
-
                                         shadow="sm"
                                         loading="lazy"
                                         isBlurred={true}

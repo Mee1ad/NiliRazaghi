@@ -22,9 +22,9 @@ export const Sidebar = () => {
         {
             href: "/galleries", text: "Gallery",
             items: [
-                {href: "/galleries/commercial", text: "Commercial"},
-                {href: "/galleries/self portrait", text: "Self Portrait"},
                 {href: "/galleries/portrait", text: "Portrait"},
+                {href: "/galleries/self portrait", text: "Self Portrait"},
+                {href: "/galleries/commercial", text: "Commercial"},
             ]
         },
         {href: "/reels", text: "Reels"},
