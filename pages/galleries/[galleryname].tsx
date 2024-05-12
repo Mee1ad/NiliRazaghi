@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {GetStaticPropsContext, NextPageContext} from "next";
 import {REVALIDATE} from "@/config/consts";
 import {useRouter} from "next/navigation";
@@ -6,11 +6,13 @@ import {DatabaseImage} from "@/interface/database_image";
 import {fetchPageByName, fetchPageImages} from "@/services/image.services";
 import {fetchPageId, populateGalleryImages} from "@/services/gallery.services";
 import Layout from "@/components/Layout";
-import {Image} from "@nextui-org/react";
+import {Image, Skeleton} from "@nextui-org/react";
 import {Page} from "@/interface/page.interface";
+import NextImage from 'next/image'
 
 
 const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
+    const [isLoaded, setIsLoaded] = useState(false)
     return (
         <Layout>
             <div className="text-center py-20">
@@ -18,14 +20,16 @@ const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
                     {
                         images && images.map((image) =>
                             <div key={image.bucket_image_id} className="mb-10">
-                                <Image
-                                    shadow="sm"
-                                    loading="eager"
-                                    isBlurred={true}
-                                    width="100%"
-                                    radius="none"
-                                    alt={image?.alt}
-                                    src={image.url}/>
+                                    <Image
+
+                                        shadow="sm"
+                                        loading="lazy"
+                                        isBlurred={true}
+                                        width="400"
+                                        height="300"
+                                        radius="none"
+                                        alt={image?.alt}
+                                        src={image.url}/>
                             </div>)
                     }
                 </section>
