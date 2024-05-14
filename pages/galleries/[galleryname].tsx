@@ -24,10 +24,10 @@ const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
                                         shadow="sm"
                                         loading="lazy"
                                         isBlurred={true}
-                                        width="400"
-                                        height="300"
+                                        width={image.width}
+                                        height={image.height}
                                         radius="none"
-                                        alt={image?.alt}
+                                        alt={image.alt}
                                         src={image.url}/>
                             </div>)
                     }
