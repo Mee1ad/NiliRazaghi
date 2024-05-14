@@ -5,7 +5,7 @@ import error = Simulate.error;
 import {
     fetchBucketFiles, fetchFileName,
     fetchPageByName,
-    fetchPageImages, fetchPublicImageUrl,
+    fetchPageImages, fetchPublicImageUrl, getImageWidthHeight,
     imageToDbImage,
     insertImage, insertImages
 } from "@/services/image.services";
@@ -23,12 +23,16 @@ export const populateGalleryCover = async (bucketFile: BucketFile, galleryId: nu
         .select("id")
         .eq("bucket_image_id", bucketFile.id)
     if (galleryCover?.length === 0) {
+        const {width, height} =
+            await getImageWidthHeight(`galleries/${bucketFile.name}`)
         const dbImage = {
             alt: fetchFileName(bucketFile.name),
             bucket_image_id: bucketFile.id,
             page_id: galleryId,
             order: 99,
-            url: fetchPublicImageUrl(`galleries/${bucketFile.name}`)
+            url: fetchPublicImageUrl(`galleries/${bucketFile.name}`),
+            width: width,
+            height: height
         }
         await insertImage(dbImage);
     }
@@ -108,20 +112,19 @@ export const fetchPageId = async (pageName: string) => {
 
 export const populateGalleryImages = async (gallery: Page, path: string) => {
     const bucketImages = await fetchBucketFiles(path)
-    console.log('populateGalleryImages', gallery)
     const galleryImages = await fetchPageImages(gallery.id)
     await removeDeletedImagesFromDB(galleryImages, bucketImages)
     const imagesToInsert: DatabaseImage[] = []
-    const images = bucketImages?.map((bucketImage) => {
+    const imagesPromises = bucketImages?.map(async (bucketImage) => {
         let galleryImage =
             galleryImages.find((image) => image.bucket_image_id === bucketImage.id)
         if (!galleryImage) {
-            galleryImage = imageToDbImage(bucketImage, gallery)
-            galleryImage.page_id = gallery.id
+            galleryImage = await imageToDbImage(bucketImage, gallery)
             imagesToInsert.push(galleryImage)
         }
         return galleryImage
     })
+    const images = await Promise.all(imagesPromises || [])
     if (images) {
         await insertImages(imagesToInsert)
     }

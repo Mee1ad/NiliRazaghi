@@ -5,6 +5,8 @@ import {Page} from "@/interface/page.interface";
 import {BucketFile, BucketDirectory} from "@/interface/image.interface";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
+import {Buffer} from "node:buffer";
+import sharp from "sharp";
 
 export const insertImages = async (images: DatabaseImage[]) => {
     const {error} = await supabase
@@ -15,7 +17,6 @@ export const insertImages = async (images: DatabaseImage[]) => {
     }
     return images
 }
-
 export const insertImage = async (image: DatabaseImage) => {
     const {error} = await supabase
         .from(IMAGE_TABLE)
@@ -25,7 +26,6 @@ export const insertImage = async (image: DatabaseImage) => {
     }
     return image
 }
-
 export const fetchBucketFiles = async (pageName: Page["name"]) => {
     let {data: bucketImages, error: bucketImagesError} = await supabase
         .storage
@@ -68,16 +68,37 @@ export const fetchPublicImageUrl = (path: string) => {
 export const fetchFileName = (fileName: string) => {
     return fileName.split('.')[0]
 }
-export const imageToDbImage = (bucketImage: BucketFile, page: Page) => {
+export const getImageWidthHeight = async (path: string) => {
+    const {data, error} = await supabase
+        .storage
+        .from(IMAGE_BUCKET)
+        .download(path)
+    if (error) throw error
+    let width = 0
+    let height = 0
+    if (data?.size > 0) {
+        const imageBuffer = await data?.arrayBuffer()
+        const buffer = Buffer.from(imageBuffer)
+        const metadata = await sharp(buffer).metadata()
+        width = metadata.width || 0
+        height = metadata.height || 0
+    }
+    return {width, height}
+}
+export const imageToDbImage = async (bucketImage: BucketFile, page: Page) => {
+    const {width, height} =
+        await getImageWidthHeight(`galleries/${page.name}/${bucketImage.name}`)
+    console.log('widthm height:', width, height)
     return {
         alt: bucketImage.name.split('.')[0],
         bucket_image_id: bucketImage.id,
         page_id: page.id,
         order: 99,
-        url: fetchPublicImageUrl(`galleries/${page.name}/${bucketImage.name}`)
+        url: fetchPublicImageUrl(`galleries/${page.name}/${bucketImage.name}`),
+        width: width,
+        height: height,
     }
 }
-
 export const fetchPageImage = async (pageName: Page["name"]) => {
     const {data: slider, error} = await supabase
         .from(PAGE_TABLE)

@@ -70,7 +70,6 @@ export const Sidebar = () => {
                         if (link.items === undefined) {
                             return (
                                 <Link
-                                    prefetch
                                     key={link.href}
                                     href={link.href}
                                     className={clsx(
@@ -105,7 +104,6 @@ export const Sidebar = () => {
                                                 const isActive = href === pathname
                                                 return (
                                                     <Link
-                                                        prefetch
                                                         key={item.href}
                                                         href={item.href}
                                                         className={clsx(

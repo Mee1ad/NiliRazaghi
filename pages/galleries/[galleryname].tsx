@@ -42,7 +42,6 @@ export default GalleryPage;
 export async function getStaticProps(context: GetStaticPropsContext) {
     const galleryName: string = context.params?.galleryname as string
     const page: Page = await fetchPageByName(galleryName)
-    console.log('here', page, galleryName)
     await populateGalleryImages(page, 'galleries/' + galleryName)
 
     const images: DatabaseImage[] = await fetchPageImages(page.id)

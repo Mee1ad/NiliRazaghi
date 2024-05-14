@@ -4,5 +4,7 @@ export interface DatabaseImage {
     bucket_image_id: string,
     page_id: number,
     order: number,
-    url: string
+    url: string,
+    width?: number,
+    height?: number,
 }
