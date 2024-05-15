@@ -11,6 +11,7 @@ import {
 } from "@/services/image.services";
 import {IMAGE_TABLE, PAGE_TABLE, REVALIDATE} from "@/config/consts";
 import supabase from "@/config/supabase_service";
+import {populateGalleryImages} from "@/services/gallery.services";
 
 interface HomeProps {
     images: DatabaseImage[]
@@ -61,20 +62,9 @@ export async function getStaticProps() {
     const pageName = "home"
 
     try {
-        const BucketFiles = await fetchBucketFiles(pageName)
         const page = await fetchPageByName(pageName)
-        const pageImages = await fetchPageImages(page.id)
-
-        const images = await Promise.all(BucketFiles.map(async (bucketFile) => {
-            let pageImage = pageImages.find(image => (image.bucket_image_id === bucketFile.id))
-            if (!pageImage) {
-
-                const imageToInsert: DatabaseImage = imageToDbImage(bucketFile, page)
-
-                pageImage = await insertImage(imageToInsert)
-            }
-            return pageImage as DatabaseImage
-        }))
+        await populateGalleryImages(page, pageName)
+        const images = await fetchPageImages(page.id)
         return {
             props: {
                 images: images,
