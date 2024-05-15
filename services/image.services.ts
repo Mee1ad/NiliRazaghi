@@ -43,6 +43,7 @@ export const fetchPageImages = async (pageId: Page["id"]) => {
         .from(IMAGE_TABLE)
         .select("*")
         .eq('page_id', pageId)
+        .order('order')
     if (dbImageError) {
         throw dbImageError
     }
@@ -69,6 +70,7 @@ export const fetchFileName = (fileName: string) => {
     return fileName.split('.')[0]
 }
 export const getImageWidthHeight = async (path: string) => {
+    console.log('path', path)
     const {data, error} = await supabase
         .storage
         .from(IMAGE_BUCKET)
@@ -85,16 +87,16 @@ export const getImageWidthHeight = async (path: string) => {
     }
     return {width, height}
 }
-export const imageToDbImage = async (bucketImage: BucketFile, page: Page) => {
+export const imageToDbImage = async (bucketImage: BucketFile, page: Page, path: string = '') => {
     const {width, height} =
-        await getImageWidthHeight(`galleries/${page.name}/${bucketImage.name}`)
+        await getImageWidthHeight(`${path}/${bucketImage.name}`)
     console.log('widthm height:', width, height)
     return {
         alt: bucketImage.name.split('.')[0],
         bucket_image_id: bucketImage.id,
         page_id: page.id,
         order: 99,
-        url: fetchPublicImageUrl(`galleries/${page.name}/${bucketImage.name}`),
+        url: fetchPublicImageUrl(`${path}/${bucketImage.name}`),
         width: width,
         height: height,
     }
