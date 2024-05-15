@@ -119,9 +119,10 @@ export const populateGalleryImages = async (gallery: Page, path: string) => {
         let galleryImage =
             galleryImages.find((image) => image.bucket_image_id === bucketImage.id)
         if (!galleryImage) {
-            galleryImage = await imageToDbImage(bucketImage, gallery)
+            galleryImage = await imageToDbImage(bucketImage, gallery, path)
             imagesToInsert.push(galleryImage)
         }
+
         return galleryImage
     })
     const images = await Promise.all(imagesPromises || [])
