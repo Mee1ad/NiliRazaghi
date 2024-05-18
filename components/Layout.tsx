@@ -5,8 +5,7 @@ import {fontJosefin} from "@/config/fonts";
 import clsx from "clsx";
 import {Sidebar} from "@/components/Sidebar";
 import {Footer} from "@/components/Footer";
-import {Navbar} from "@/components/navbar";
-import {Providers} from '../app/providers'
+import {Providers} from '@/app/providers'
 
 export const metadata: Metadata = {
     title: {
