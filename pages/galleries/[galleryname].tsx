@@ -12,26 +12,24 @@ import {Page} from "@/interface/page.interface";
 const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
     const [isLoaded, setIsLoaded] = useState(false)
     return (
-        <Layout>
-            <div className="text-center py-20">
-                <section className="columns-1 sm:columns-2 md:columns-3 gap-10 p-10">
-                    {
-                        images && images.map((image) =>
-                            <div key={image.bucket_image_id} className="mb-10">
-                                    <Image
-                                        shadow="sm"
-                                        loading="lazy"
-                                        isBlurred={true}
-                                        width={image.width}
-                                        height={image.height}
-                                        radius="none"
-                                        alt={image.alt}
-                                        src={image.url}/>
-                            </div>)
-                    }
-                </section>
-            </div>
-        </Layout>
+        <div className="text-center py-20">
+            <section className="columns-1 sm:columns-2 md:columns-3 gap-10 p-10">
+                {
+                    images && images.map((image) =>
+                        <div key={image.bucket_image_id} className="mb-10">
+                            <Image
+                                shadow="sm"
+                                loading="lazy"
+                                isBlurred={true}
+                                width={image.width}
+                                height={image.height}
+                                radius="none"
+                                alt={image.alt}
+                                src={image.url}/>
+                        </div>)
+                }
+            </section>
+        </div>
     );
 }
 

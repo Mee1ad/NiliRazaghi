@@ -29,7 +29,6 @@ export const Sidebar = () => {
     ]
 
     const navigateTo = useCallback((route: string) => () => {
-        console.log('clicked')
         router.push(route)
     }, [router])
 
@@ -61,8 +60,10 @@ export const Sidebar = () => {
                         </Link>
                     </footer>
                 </section>
-                <section className="flex-col flex text-left">
+                <section className="flex-col flex text-left divide-y">
                     {links.map(link => {
+                        console.log("link", link.href)
+                        console.log("pathname", router.pathname)
                         const isActive = router.pathname.includes(link.href) &&
                             (link.href !== '/' || router.pathname === '/')
                         if (link.items === undefined) {
@@ -71,7 +72,7 @@ export const Sidebar = () => {
                                     key={link.href}
                                     href={link.href}
                                     className={clsx(
-                                        "border-b-1.5 leading-[3]",
+                                        "leading-[3]",
                                         "transition-colors duration-200",
                                         {
                                             "text-gray-500 hover:text-black": !isActive,
@@ -85,18 +86,22 @@ export const Sidebar = () => {
                         }
                         if (link.items) {
                             return (
-                                // <Accordion key={link.href} isCompact defaultExpandedKeys={["1"]}
                                 <Accordion key={link.href} isCompact onSelectionChange={navigateTo(link.href)}
-                                           selectedKeys={isActive ? "all" : []}
-                                           className={clsx("px-0 py-1",
-                                               {
-                                                   "[&_span]:text-gray-500 border-b-1.5": !isActive,
-                                                   "[&_span]:text-black border-b-0": isActive
-                                               })}>
+                                           selectedKeys={isActive ? "all" : []} hideIndicator
+                                           itemClasses={{
+                                               title: clsx(
+                                                   "hover:text-black",
+                                                   {
+                                                       "text-gray-500": !isActive,
+                                                       "text-black": isActive
+                                                   }),
+                                           }}
+                                           className={clsx("px-0 py-1 ",
+                                           )}>
                                     <AccordionItem key="1" aria-label="Galleries" title="Galleries"
                                                    classNames={{content: "py-0 border-t-1.5"}}>
-                                        <div className="flex flex-col pl-4 py-0 text-gray-500">
-                                            {link.items.map(item => {
+                                        <div className="flex flex-col pl-4 py-0 text-gray-500 divide-y">
+                                            {link.items.map((item, index) => {
                                                 const href = item.href.split('/')[2]
                                                 const pathname = router.query['galleryname']
                                                 const isActive = href === pathname
@@ -105,8 +110,7 @@ export const Sidebar = () => {
                                                         key={item.href}
                                                         href={item.href}
                                                         className={clsx(
-                                                            "border-b-1.5 leading-[3]",
-                                                            "transition-colors duration-200",
+                                                            "leading-[3] transition-colors duration-200",
                                                             {
                                                                 "text-gray-500 hover:text-black": !isActive,
                                                                 "text-black": isActive
