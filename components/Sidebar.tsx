@@ -1,13 +1,10 @@
-import {siteConfig} from "@/config/site";
-import {PiTelegramLogoThin} from "react-icons/pi";
-import {PiInstagramLogoLight} from "react-icons/pi";
+import {PiInstagramLogoLight, PiTelegramLogoThin} from "react-icons/pi";
 import {CiLinkedin} from "react-icons/ci";
 // import {fontjosefin} from "@/config/fonts";
 import clsx from "clsx";
-import {ThemeSwitch} from "@/components/theme-switch";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {accordion, Accordion, AccordionItem} from "@nextui-org/react";
+import {Accordion, AccordionItem} from "@nextui-org/react";
 import {useCallback, useEffect} from "react";
 
 
@@ -48,7 +45,9 @@ export const Sidebar = () => {
             <div className="px-8 py-32 w-23 h-full fixed z-50 text-center"
                  style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
                 <section className="flex flex-col items-center mb-10">
-                    <h1 className="text-3xl font-bold sticky top-0">Nili Razaghi</h1>
+                    <Link
+                        href="/"
+                        className="text-3xl font-bold sticky top-0">Nili Razaghi</Link>
                     <h3>Photographer</h3>
                     {/*<ThemeSwitch/>*/}
                     <footer className="flex text-3xl justify-center gap-2 pt-4">
