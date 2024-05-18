@@ -1,9 +1,6 @@
 import Layout from "@/components/Layout";
 import {title} from "@/components/primitives";
 import {Image} from "@nextui-org/react";
-import {fetchPageImage} from "@/services/image.services";
-import {REVALIDATE} from "@/config/consts";
-import {DatabaseImage} from "@/interface/database_image";
 import {FC} from "react";
 
 
@@ -17,6 +14,8 @@ const AboutPage: FC = () => {
 
                 {/*<h1 className="text-3xl font-bold text-center pt-20">About Me</h1>*/}
                 <Image
+                    loading="lazy"
+                    isBlurred
                     width="1080"
                     height="720"
                     radius="none"

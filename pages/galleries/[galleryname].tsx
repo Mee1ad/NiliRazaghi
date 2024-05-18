@@ -1,14 +1,12 @@
 import {FC, useState} from "react";
-import {GetStaticPropsContext, NextPageContext} from "next";
+import {GetStaticPropsContext} from "next";
 import {REVALIDATE} from "@/config/consts";
-import {useRouter} from "next/navigation";
 import {DatabaseImage} from "@/interface/database_image";
 import {fetchPageByName, fetchPageImages} from "@/services/image.services";
-import {fetchPageId, populateGalleryImages} from "@/services/gallery.services";
+import {populateGalleryImages} from "@/services/gallery.services";
 import Layout from "@/components/Layout";
-import {Image, Skeleton} from "@nextui-org/react";
+import {Image} from "@nextui-org/react";
 import {Page} from "@/interface/page.interface";
-import NextImage from 'next/image'
 
 
 const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
