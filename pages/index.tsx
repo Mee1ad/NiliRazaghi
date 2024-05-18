@@ -1,6 +1,6 @@
 import {Image} from "@nextui-org/react"
 import {FC} from "react"
-import Layout from "@/components/Layout"
+import Layout from "@/components/layout"
 import {DatabaseImage} from "@/interface/database_image";
 import {
     fetchPageByName,

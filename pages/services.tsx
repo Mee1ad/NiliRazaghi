@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import {title} from "@/components/primitives";
 import {CardFooter, Image, Card, Button, Link} from "@nextui-org/react";
 

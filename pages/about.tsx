@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import {title} from "@/components/primitives";
 import {Image} from "@nextui-org/react";
 import {FC} from "react";

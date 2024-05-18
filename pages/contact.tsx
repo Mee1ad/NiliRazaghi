@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {title} from "@/components/primitives";
 import {Input, Textarea, Button} from "@nextui-org/react";

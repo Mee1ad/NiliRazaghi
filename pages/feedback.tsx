@@ -1,7 +1,7 @@
 import {title} from "@/components/primitives";
 import {MdCameraAlt} from "react-icons/md";
 import {Input} from "@nextui-org/react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import {
     fetchBucketFiles,
     fetchFileName,

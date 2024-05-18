@@ -4,7 +4,7 @@ import {REVALIDATE} from "@/config/consts";
 import {DatabaseImage} from "@/interface/database_image";
 import {fetchPageByName, fetchPageImages} from "@/services/image.services";
 import {populateGalleryImages} from "@/services/gallery.services";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import {Image} from "@nextui-org/react";
 import {Page} from "@/interface/page.interface";
 

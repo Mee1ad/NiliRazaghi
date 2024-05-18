@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout";
 import dynamic from 'next/dynamic';
 import {title} from "@/components/primitives";
 import {fetchBucketFiles} from "@/services/image.services";
