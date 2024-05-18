@@ -31,7 +31,8 @@ const HomePage: FC<HomeProps> = ({images}) => {
                     our own eyes, there is another in which it proves to us how little our eyes permit us to see.</p>
                 <div className="w-1/4 pt-10">
                     <Image
-                        width="100%"
+                        width="1080"
+                        height="720"
                         radius="none"
                         alt="nili_sign"
                         src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/nili_sign.png?t=2024-05-11T16%3A59%3A02.385Z"/>
