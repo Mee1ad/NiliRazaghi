@@ -12,7 +12,7 @@ import {populateGalleryImages} from "@/services/gallery.services";
 interface HomeProps {
     images: DatabaseImage[]
 }
-const test = "py-2"
+
 const HomePage: FC<HomeProps> = ({images}) => {
     return (
         <Layout>
