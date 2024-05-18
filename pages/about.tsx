@@ -15,9 +15,8 @@ const AboutPage: FC = () => {
                 {/*<h1 className="text-3xl font-bold text-center pt-20">About Me</h1>*/}
                 <Image
                     loading="lazy"
-                    isBlurred
-                    width="1080"
-                    height="720"
+                    width="4608"
+                    height="3072"
                     radius="none"
                     alt="a_girl_with_book"
                     src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/about_slider.webp"
