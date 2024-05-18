@@ -3,14 +3,10 @@ import {FC} from "react"
 import Layout from "@/components/Layout"
 import {DatabaseImage} from "@/interface/database_image";
 import {
-    fetchBucketFiles,
-    fetchPageByName, fetchPageImage,
+    fetchPageByName,
     fetchPageImages,
-    fetchPublicImageUrl, imageToDbImage,
-    insertImage
 } from "@/services/image.services";
-import {IMAGE_TABLE, PAGE_TABLE, REVALIDATE} from "@/config/consts";
-import supabase from "@/config/supabase_service";
+import {REVALIDATE} from "@/config/consts";
 import {populateGalleryImages} from "@/services/gallery.services";
 
 interface HomeProps {

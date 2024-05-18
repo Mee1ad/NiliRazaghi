@@ -1,7 +1,6 @@
-import {Image} from "@nextui-org/react";
 import {title} from "@/components/primitives";
 import {MdCameraAlt} from "react-icons/md";
-import {Input} from "@nextui-org/input";
+import {Input} from "@nextui-org/react";
 import Layout from "@/components/Layout";
 import {
     fetchBucketFiles,
@@ -13,11 +12,10 @@ import {
 } from "@/services/image.services";
 import {DatabaseImage} from "@/interface/database_image";
 import {fetchFeedbacks} from "@/services/feedback.services";
-import {IMAGE_TABLE, REVALIDATE} from "@/config/consts";
+import {REVALIDATE} from "@/config/consts";
 import {Feedback} from "@/interface/feedback.interface";
 import {FC} from "react";
 import FeedbackCard from "@/components/FeedbackCard";
-import feedbackCard from "@/components/FeedbackCard";
 
 interface FeedbackProps {
     feedbacks: Feedback[]

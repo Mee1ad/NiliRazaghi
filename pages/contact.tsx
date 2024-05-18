@@ -1,16 +1,13 @@
 import Layout from "@/components/Layout";
 import {ChangeEvent, FC, FormEvent, useState} from "react";
 import {title} from "@/components/primitives";
-import {Input, Textarea} from "@nextui-org/input";
+import {Input, Textarea, Button} from "@nextui-org/react";
 import {MailIcon} from "@nextui-org/shared-icons";
 import {GoNumber} from "react-icons/go";
 import {MdOutlineDriveFileRenameOutline, MdSubject} from "react-icons/md";
 import {BsChatSquareText} from "react-icons/bs";
-import {Button} from "@nextui-org/button";
 import {SALT} from "@/config/consts";
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 import md5 from "md5";
 
 const ContactPage: FC = () => {

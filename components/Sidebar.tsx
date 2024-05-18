@@ -1,6 +1,5 @@
 import {PiInstagramLogoLight, PiTelegramLogoThin} from "react-icons/pi";
 import {CiLinkedin} from "react-icons/ci";
-// import {fontjosefin} from "@/config/fonts";
 import clsx from "clsx";
 import {useRouter} from "next/router";
 import Link from "next/link";

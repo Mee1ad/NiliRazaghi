@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import {title} from "@/components/primitives";
-import {ThemeSwitch} from "@/components/theme-switch";
 import {CardFooter, Image, Card, Button, Link} from "@nextui-org/react";
 
 export default function ServicesPage() {

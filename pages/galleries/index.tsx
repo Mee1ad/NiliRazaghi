@@ -1,10 +1,10 @@
 import {FC} from "react";
 import {REVALIDATE} from "@/config/consts";
-import {fetchBucketGalleries, fetchGalleries, fetchGalleryPage, populateGalleries} from '@/services/gallery.services'
-import {fetchBucketFiles, fetchPageImages} from "@/services/image.services";
+import {fetchGalleryPage, populateGalleries} from '@/services/gallery.services'
+import {fetchBucketFiles} from "@/services/image.services";
 import {BucketFile} from "@/interface/image.interface";
 import {title} from "@/components/primitives";
-import {Button, Card, CardBody, CardFooter, CardHeader, Image} from "@nextui-org/react";
+import {Card, CardHeader, Image} from "@nextui-org/react";
 import Layout from "@/components/Layout";
 import {DatabaseImage} from "@/interface/database_image";
 import NextLink from "next/link";
