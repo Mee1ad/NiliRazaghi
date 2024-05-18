@@ -23,7 +23,7 @@ export default function Layout({
             )}
                  style={{fontFamily: "var(--font-josefin)"}}>
                 <Sidebar/>
-                <section className="w-77 flex-grow">
+                <section className="relative min-h-screen w-77 flex-grow">
                     <main>{children}</main>
                     <Footer/>
                 </section>
