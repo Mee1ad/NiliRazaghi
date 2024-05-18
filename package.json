@@ -11,6 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.3.6",
     "@nextui-org/shared-icons": "^2.0.7",
+    "@nextui-org/theme": "^2.2.3",
     "@react-aria/ssr": "^3.9.3",
     "@react-aria/visually-hidden": "^3.8.11",
     "@supabase/storage-js": "^2.5.5",
