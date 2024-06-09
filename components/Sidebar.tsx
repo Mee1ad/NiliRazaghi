@@ -1,17 +1,17 @@
 import {PiInstagramLogoLight, PiTelegramLogoThin} from "react-icons/pi";
+import {RxHamburgerMenu} from "react-icons/rx";
 import {CiLinkedin} from "react-icons/ci";
 import clsx from "clsx";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {Accordion, AccordionItem} from "@nextui-org/react";
 import {useCallback, useEffect} from "react";
+import React from "react";
 
 
 export const Sidebar = () => {
 
     const router = useRouter()
-    console.log('router.pathname', router.pathname)
-
     const links = [
         {href: "/", text: "Home"},
         {href: "/about", text: "About"},
@@ -32,22 +32,106 @@ export const Sidebar = () => {
         router.push(route)
     }, [router])
 
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+
     useEffect(() => {
         links.filter(link => link.items).map(link => {
             router.prefetch(link.href)
         })
     }, [links, router])
 
+    function triggerMenu() {
+        setIsMenuOpen(prev => !prev)
+        console.log(isMenuOpen)
+    }
+
     return (
-        <div className="w-23 z-50">
-            <div className="px-8 py-32 w-23 h-full fixed z-50 text-center"
-                 style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
-                <section className="flex flex-col items-center mb-10">
-                    <Link
-                        href="/"
-                        className="text-3xl font-bold sticky top-0">Nili Razaghi</Link>
-                    <h3>Photographer</h3>
-                    {/*<ThemeSwitch/>*/}
+        <div className="w-full md:w-23 z-50">
+            <button className="text-2xl cursor-pointer left-8 top-8 md:hidden" onClick={triggerMenu}>
+                <RxHamburgerMenu />
+            </button>
+
+            <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} md:w-23 z-50 fixed transition-all duration-200`}>
+                <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} px-8 py-8 md:w-23 bg-white h-full md:fixed text-center transition-all duration-200`}
+                     style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
+                    <section className="flex flex-col items-center mb-6 mt-16">
+                        <Link
+                            href="/"
+                            className="text-3xl font-bold sticky top-0">Nili Razaghi</Link>
+                        <h3>Photographer</h3>
+                        {/*<ThemeSwitch/>*/}
+
+                    </section>
+                    <section className="flex-col flex text-left divide-y">
+                        {links.map(link => {
+                            console.log("link", link.href)
+                            console.log("pathname", router.pathname)
+                            const isActive = router.pathname.includes(link.href) &&
+                                (link.href !== '/' || router.pathname === '/')
+                            if (link.items === undefined) {
+                                return (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        className={clsx(
+                                            "leading-[3]",
+                                            "transition-colors duration-200",
+                                            {
+                                                "text-gray-500 hover:text-black": !isActive,
+                                                "text-black": isActive
+                                            })}
+                                        color="foreground"
+                                    >
+                                        {link.text}
+                                    </Link>
+                                );
+                            }
+                            if (link.items) {
+                                return (
+                                    <Accordion key={link.href} isCompact onSelectionChange={navigateTo(link.href)}
+                                               selectedKeys={isActive ? "all" : []} hideIndicator
+                                               itemClasses={{
+                                                   title: clsx(
+                                                       "hover:text-black",
+                                                       {
+                                                           "text-gray-500": !isActive,
+                                                           "text-black": isActive
+                                                       }),
+                                               }}
+                                               className={clsx("px-0 py-1 ",
+                                               )}>
+                                        <AccordionItem key="1" aria-label="Galleries" title="Galleries"
+                                                       classNames={{content: "py-0 border-t-1.5"}}>
+                                            <div className="flex flex-col pl-4 py-0 text-gray-500 divide-y">
+                                                {link.items.map((item, index) => {
+                                                    const href = item.href.split('/')[2]
+                                                    const pathname = router.query['galleryname']
+                                                    const isActive = href === pathname
+                                                    return (
+                                                        <Link
+                                                            key={item.href}
+                                                            href={item.href}
+                                                            className={clsx(
+                                                                "leading-[3] transition-colors duration-200",
+                                                                {
+                                                                    "text-gray-500 hover:text-black": !isActive,
+                                                                    "text-black": isActive
+                                                                })}
+                                                            color="foreground"
+                                                        >
+                                                            {item.text}
+                                                        </Link>
+                                                    );
+                                                })
+                                                }
+                                            </div>
+                                        </AccordionItem>
+                                    </Accordion>
+                                )
+                            }
+
+                        })}
+                    </section>
                     <footer className="flex text-3xl justify-center gap-2 pt-4">
                         <Link href="https://t.me/Nilucheh" target="_blank">
                             <PiTelegramLogoThin/>
@@ -59,78 +143,7 @@ export const Sidebar = () => {
                             <CiLinkedin/>
                         </Link>
                     </footer>
-                </section>
-                <section className="flex-col flex text-left divide-y">
-                    {links.map(link => {
-                        console.log("link", link.href)
-                        console.log("pathname", router.pathname)
-                        const isActive = router.pathname.includes(link.href) &&
-                            (link.href !== '/' || router.pathname === '/')
-                        if (link.items === undefined) {
-                            return (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className={clsx(
-                                        "leading-[3]",
-                                        "transition-colors duration-200",
-                                        {
-                                            "text-gray-500 hover:text-black": !isActive,
-                                            "text-black": isActive
-                                        })}
-                                    color="foreground"
-                                >
-                                    {link.text}
-                                </Link>
-                            );
-                        }
-                        if (link.items) {
-                            return (
-                                <Accordion key={link.href} isCompact onSelectionChange={navigateTo(link.href)}
-                                           selectedKeys={isActive ? "all" : []} hideIndicator
-                                           itemClasses={{
-                                               title: clsx(
-                                                   "hover:text-black",
-                                                   {
-                                                       "text-gray-500": !isActive,
-                                                       "text-black": isActive
-                                                   }),
-                                           }}
-                                           className={clsx("px-0 py-1 ",
-                                           )}>
-                                    <AccordionItem key="1" aria-label="Galleries" title="Galleries"
-                                                   classNames={{content: "py-0 border-t-1.5"}}>
-                                        <div className="flex flex-col pl-4 py-0 text-gray-500 divide-y">
-                                            {link.items.map((item, index) => {
-                                                const href = item.href.split('/')[2]
-                                                const pathname = router.query['galleryname']
-                                                const isActive = href === pathname
-                                                return (
-                                                    <Link
-                                                        key={item.href}
-                                                        href={item.href}
-                                                        className={clsx(
-                                                            "leading-[3] transition-colors duration-200",
-                                                            {
-                                                                "text-gray-500 hover:text-black": !isActive,
-                                                                "text-black": isActive
-                                                            })}
-                                                        color="foreground"
-                                                    >
-                                                        {item.text}
-                                                    </Link>
-                                                );
-                                            })
-                                            }
-                                        </div>
-                                    </AccordionItem>
-                                </Accordion>
-                            )
-                        }
-
-                    })}
-                </section>
-
+                </div>
             </div>
         </div>
     )
