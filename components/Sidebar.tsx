@@ -53,7 +53,7 @@ export const Sidebar = () => {
             <div
                 className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} md:w-23 z-50 h-full fixed transition-all duration-200`}>
                 <div
-                    className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} px-8 py-8 md:w-23 bg-white h-full md:fixed text-center transition-all duration-200`}
+                    className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} px-8 py-6  md:w-23 bg-white h-full md:fixed text-center transition-all duration-200`}
                     style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
                     <button className="text-2xl md:hidden text-left block fixed" onClick={triggerMenu}>
                         <RxHamburgerMenu/>

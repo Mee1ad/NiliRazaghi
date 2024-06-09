@@ -15,7 +15,7 @@ interface HomeProps {
 
 const HomePage: FC<HomeProps> = ({images}) => {
     return (
-        <div className="flex flex-col text-xl text-gray-500 items-center w-full">
+        <div className="flex flex-col text-xl text-gray-500 items-center w-full mt-16 md:mt-0">
             <Image
                 loading="lazy"
                 width="4608"
