@@ -46,12 +46,12 @@ export const Sidebar = () => {
     }
 
     return (
-        <div className="w-full md:w-23 z-50">
+        <div className="w-full md:w-23 h-full">
             <button className="text-2xl cursor-pointer left-8 top-8 md:hidden" onClick={triggerMenu}>
                 <RxHamburgerMenu />
             </button>
 
-            <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} md:w-23 z-50 fixed transition-all duration-200`}>
+            <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} md:w-23 z-50 h-full fixed transition-all duration-200`}>
                 <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} px-8 py-8 md:w-23 bg-white h-full md:fixed text-center transition-all duration-200`}
                      style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
                     <section className="flex flex-col items-center mb-6 mt-16">

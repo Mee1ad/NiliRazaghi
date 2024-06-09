@@ -15,7 +15,7 @@ interface HomeProps {
 
 const HomePage: FC<HomeProps> = ({images}) => {
     return (
-        <div className="flex flex-col text-xl text-gray-500 items-center">
+        <div className="flex flex-col text-xl text-gray-500 items-center w-full">
             <Image
                 loading="lazy"
                 width="4608"
@@ -23,7 +23,7 @@ const HomePage: FC<HomeProps> = ({images}) => {
                 radius="none"
                 alt="a girl looking to camera"
                 src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/home_slider.webp?t=2024-05-11T16%3A58%3A12.926Z"/>
-            <p className="px-56 pt-28">While there is perhaps a province in which the photograph can tell us nothing
+            <p className="md:px-56 px-12 pt-28">While there is perhaps a province in which the photograph can tell us nothing
                 more than what we see with
                 our own eyes, there is another in which it proves to us how little our eyes permit us to see.</p>
             <div className="w-1/4 pt-10">
@@ -39,7 +39,7 @@ const HomePage: FC<HomeProps> = ({images}) => {
             <div className="flex w-full flex-wrap gap-8 justify-between px-10 py-10">
                 {
                     images.map((image, index) =>
-                        <div key={image?.bucket_image_id} className="w-album-image">
+                        <div key={image?.bucket_image_id} className="md:w-album-image w-full">
                             <Image
                                 shadow="sm"
                                 loading="eager"
