@@ -32,7 +32,7 @@ export const Sidebar = () => {
         router.push(route)
     }, [router])
 
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+    const [isMenuOpen, setIsMenuOpen] = React.useState(true)
 
     useEffect(() => {
         links.filter(link => link.items).map(link => {
@@ -40,21 +40,26 @@ export const Sidebar = () => {
         })
     }, [links, router])
 
+    useEffect(() => {
+        setIsMenuOpen(prev => !prev)
+    }, [router])
+
     function triggerMenu() {
         setIsMenuOpen(prev => !prev)
-        console.log(isMenuOpen)
     }
 
     return (
         <div className="w-full md:w-23 h-full">
-            <button className="text-2xl cursor-pointer left-8 top-8 md:hidden" onClick={triggerMenu}>
-                <RxHamburgerMenu />
-            </button>
+            <div
+                className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} md:w-23 z-50 h-full fixed transition-all duration-200`}>
+                <div
+                    className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} px-8 py-8 md:w-23 bg-white h-full md:fixed text-center transition-all duration-200`}
+                    style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
+                    <button className="text-2xl md:hidden text-left block fixed" onClick={triggerMenu}>
+                        <RxHamburgerMenu/>
+                    </button>
+                    <section className="flex flex-col items-center mb-6 mt-8">
 
-            <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} md:w-23 z-50 h-full fixed transition-all duration-200`}>
-                <div className={`${isMenuOpen ? `w-full` : `w-0 overflow-hidden`} px-8 py-8 md:w-23 bg-white h-full md:fixed text-center transition-all duration-200`}
-                     style={{boxShadow: "1px 1px 20px 0 rgba(153, 153, 153, 0.32)"}}>
-                    <section className="flex flex-col items-center mb-6 mt-16">
                         <Link
                             href="/"
                             className="text-3xl font-bold sticky top-0">Nili Razaghi</Link>
@@ -64,8 +69,8 @@ export const Sidebar = () => {
                     </section>
                     <section className="flex-col flex text-left divide-y">
                         {links.map(link => {
-                            console.log("link", link.href)
-                            console.log("pathname", router.pathname)
+                            // console.log("link", link.href)
+                            // console.log("pathname", router.pathname)
                             const isActive = router.pathname.includes(link.href) &&
                                 (link.href !== '/' || router.pathname === '/')
                             if (link.items === undefined) {

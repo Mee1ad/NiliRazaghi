@@ -4,6 +4,7 @@ import {Image} from "@nextui-org/react";
 import {FC} from "react";
 
 
+
 const AboutPage: FC = () => {
     return (
         <div className="flex flex-col gap-8 px-10">
