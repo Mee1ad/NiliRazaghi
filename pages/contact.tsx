@@ -50,14 +50,14 @@ const ContactPage: FC = () => {
     return (
         <div className="text-center px-10 py-20">
             <title className={title()}>Contact Us</title>
-            <div className="pt-20 flex">
-                <div className="flex flex-col items-start gap-2 w-1/2">
-                    <h4 className="pb-14 text-2xl font-bold">I’m available for worldwide orders.</h4>
+            <div className="pt-20 flex flex-col md:flex-row gap-16">
+                <div className="flex flex-col md:items-start gap-2 md:w-1/2 w-full items-center">
+                    <h4 className="md:pb-16 pb-8 text-2xl font-bold">I’m available for worldwide orders.</h4>
                     <h5 className="text-lg"><span className="font-bold">Phone:</span> +98 911 834 5796</h5>
                     <h5 className="text-lg"><span className="font-bold">Email:</span> nilo.razaghi@gmail.com</h5>
                     <h5 className="text-lg"><span className="font-bold">Address:</span> Turkey, Istanbul.</h5>
                 </div>
-                <form className="flex flex-col items-start gap-4 w-1/2 text-lg" onSubmit={handleFormSubmit}>
+                <form className="flex flex-col items-start gap-4 md:w-1/2 w-full text-lg" onSubmit={handleFormSubmit}>
                     <h4 className="text-2xl font-bold">Contact Form</h4>
                     <h5>Interested to work wiht us?</h5>
                     <Input
