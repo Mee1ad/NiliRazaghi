@@ -30,8 +30,8 @@ const AboutPage: FC = () => {
                     portfolio
                     to include commercial photography and videography, honing her skills by working with GCorp media
                     team
-                    and now serving as the media director of Royal Beauty Clinic and also works as a freelance
-                    photographer.
+                    After that she served as the media director of Royal Beauty Clinic for two and half years and also works as a freelance
+                    Content creator.
 
                     Nili&apos;s love for her craft shines through in her cinematic photographs, which blend artistry and
                     technical skill to create images. Her relentless pursuit of excellence drives her to
