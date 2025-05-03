@@ -23,15 +23,13 @@ const HomePage: FC<HomeProps> = ({images}) => {
                 radius="none"
                 alt="a girl looking to camera"
                 src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/home_slider.webp?t=2024-05-11T16%3A58%3A12.926Z"/>
-            <p className="md:px-56 px-12 pt-28">While there is perhaps a province in which the photograph can tell us nothing
-                more than what we see with
-                our own eyes, there is another in which it proves to us how little our eyes permit us to see.</p>
-            <div className="w-1/4 pt-10">
+            <p className="md:px-56 px-12 pt-16">Seeing is a job. Capturing is an art. And art is what shapes the world.
+                I take photos not just to be seen but to see better. To make a moment, a feeling, a story last forever. This isn’t just a job. This is my life.</p>
+            <div className="pb-10 opacity-70 self-end pr-72">
                 <Image
                     loading="lazy"
-                    isBlurred
-                    width="776"
-                    height="213"
+                    width="70"
+                    height="30"
                     radius="none"
                     alt="nili_sign"
                     src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/nili_sign.png?t=2024-05-11T16%3A59%3A02.385Z"/>

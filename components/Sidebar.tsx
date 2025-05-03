@@ -14,7 +14,6 @@ export const Sidebar = () => {
     const router = useRouter()
     const links = [
         {href: "/", text: "Home"},
-        {href: "/about", text: "About"},
         {
             href: "/galleries", text: "Gallery",
             items: [
@@ -23,7 +22,8 @@ export const Sidebar = () => {
                 {href: "/galleries/commercial", text: "Commercial"},
             ]
         },
-        {href: "/reels", text: "Reels"},
+        {href: "/reels", text: "Video Content"},
+        {href: "/about", text: "About Me"},
         {href: "/feedback", text: "Feedback"},
         {href: "/contact", text: "Contact"}
     ]
@@ -63,7 +63,7 @@ export const Sidebar = () => {
                         <Link
                             href="/"
                             className="text-3xl font-bold sticky top-0">Nili Razaghi</Link>
-                        <h3>Photographer</h3>
+                        <h3>Photographer & Videographer</h3>
                         {/*<ThemeSwitch/>*/}
 
                     </section>

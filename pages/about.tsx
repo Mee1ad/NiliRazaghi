@@ -24,26 +24,17 @@ const AboutPage: FC = () => {
             <div className="flex flex-col gap-2">
                 <span className="text-sm text-gray-500">PHOTOGRAPHER</span>
                 <h1 className="text-3xl font-bold">Nili Razaghi</h1>
-                <p className="pt-10 text-gray-500">Nili Razaghi is a photographer based in Iran. Nili has been
-                    professionally pursuing photography since
-                    the age of 17, starting as a wedding and kids photographer. Over the years, she expanded her
-                    portfolio
-                    to include commercial photography and videography, honing her skills by working with GCorp media
-                    team
-                    After that she served as the media director of Royal Beauty Clinic for two and half years and also works as a freelance
-                    Content creator.
+                <p className="pt-10 text-gray-500 text-xl">I’m Nili Razaghi, a photographer & videographer based in Istanbul. I got my first camera at 15, took formal classes, and at 17 began shooting weddings and children’s portraits professionally in Iran. I then joined GCorp’s media team to dive into commercial photography and cinematic videography, and later served as Media Director at Royal Beauty Clinic for two and a half years.
 
-                    Nili&apos;s love for her craft shines through in her cinematic photographs, which blend artistry and
-                    technical skill to create images. Her relentless pursuit of excellence drives her to
-                    continuously
-                    improve her skills and learn something new with every photography session.
+                    Today I run a freelance practice—creating photo & video content for brands and social channels. I have a passion for cinematic lighting, I love modeling, and I’m eager to break into cinema. For me, every shoot is more than a job: it’s a chance to blend artistic vision with technical craft, capture authentic moments, and keep pushing my skills to the next level.
                 </p>
                 <div className="w-1/4 pt-10 pb-36">
                     <Image
-                        width="100%"
+                        width="79"
+                        height="37"
                         radius="none"
                         alt="Nili Razaghi Sign"
-                        src="/home/sign.png"
+                        src="https://zmhtvmpgfbcmndmudwow.supabase.co/storage/v1/object/public/Nili%20Website/nili_sign.png?t=2024-05-11T16%3A59%3A02.385Z"
                     />
                 </div>
             </div>
