@@ -24,7 +24,7 @@ const AboutPage: FC = () => {
             <div className="flex flex-col gap-2">
                 <span className="text-sm text-gray-500">PHOTOGRAPHER</span>
                 <h1 className="text-3xl font-bold">Nili Razaghi</h1>
-                <p className="pt-10 text-gray-500 text-xl">I’m Nili Razaghi, a photographer & videographer based in Istanbul. I got my first camera at 15, took formal classes, and at 17 began shooting weddings and children’s portraits professionally in Iran. I then joined GCorp’s media team to dive into commercial photography and cinematic videography, and later served as Media Director at Royal Beauty Clinic for two and a half years.
+                <p className="pt-10 text-gray-500">I’m Nili Razaghi, a photographer & videographer based in Istanbul. I got my first camera at 15, took formal classes, and at 17 began shooting weddings and children’s portraits professionally in Iran. I then joined GCorp’s media team to dive into commercial photography and cinematic videography, and later served as Media Director at Royal Beauty Clinic for two and a half years.
 
                     Today I run a freelance practice—creating photo & video content for brands and social channels. I have a passion for cinematic lighting, I love modeling, and I’m eager to break into cinema. For me, every shoot is more than a job: it’s a chance to blend artistic vision with technical craft, capture authentic moments, and keep pushing my skills to the next level.
                 </p>
