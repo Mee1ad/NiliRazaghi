@@ -42,7 +42,9 @@ export const Sidebar = () => {
     }, [links, router])
 
     useEffect(() => {
-        setIsMenuOpen(prev => !prev)
+        if (window.innerWidth < 768) {
+            setIsMenuOpen(false)
+        }
     }, [router])
 
     function triggerMenu() {
