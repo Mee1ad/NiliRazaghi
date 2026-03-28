@@ -75,6 +75,7 @@ export const fetchGalleryPage = async () => {
     return galleries as DatabaseImage[]
 }
 
+
 export const fetchGalleries = async (page_id: number) => {
     const {data: galleries, error} = await supabase
         .from(PAGE_TABLE)
