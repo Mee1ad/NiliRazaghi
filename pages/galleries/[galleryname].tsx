@@ -38,6 +38,14 @@ export default GalleryPage;
 export async function getStaticProps(context: GetStaticPropsContext) {
     const galleryName: string = context.params?.galleryname as string
     const page: Page = await fetchPageByName(galleryName)
+    
+    if (!page) {
+        return {
+            notFound: true,
+            revalidate: 60
+        }
+    }
+    
     await populateGalleryImages(page, 'galleries/' + galleryName)
 
     const images: DatabaseImage[] = await fetchPageImages(page.id)
@@ -57,7 +65,8 @@ export async function getStaticPaths() {
             '/galleries/commercial',
             '/galleries/self%20portrait',
             '/galleries/portrait',
+            '/galleries/pet%20and%20family',
         ],
-        fallback: true,
+        fallback: 'blocking',
     }
 }
