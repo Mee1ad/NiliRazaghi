@@ -20,6 +20,7 @@ export const Sidebar = () => {
                 {href: "/galleries/portrait", text: "Portrait"},
                 {href: "/galleries/self portrait", text: "Self Portrait"},
                 {href: "/galleries/commercial", text: "Commercial"},
+                {href: "/galleries/pet and family", text: "Pet and Family"},
             ]
         },
         {href: "/reels", text: "Video Content"},
