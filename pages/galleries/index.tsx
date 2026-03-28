@@ -12,7 +12,7 @@ const GalleryPage: FC<{ galleries: DatabaseImage[] }> = ({galleries}) => {
     return (
         <div className="text-center py-20">
             <title className={title()}>Portfolio</title>
-            <section className="columns-1 sm:columns-2 md:columns-3 gap-10 p-10">
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-10 max-w-fit mx-auto">
                 {
                     galleries.map((gallery) =>
                         <div key={gallery.bucket_image_id} className="mb-10">

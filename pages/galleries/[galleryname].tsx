@@ -13,7 +13,7 @@ const GalleryPage: FC<{ images: DatabaseImage[] }> = ({images}) => {
     const [isLoaded, setIsLoaded] = useState(false)
     return (
         <div className="text-center py-20">
-            <section className="columns-1 sm:columns-2 md:columns-3 gap-10 p-10">
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-10 max-w-fit mx-auto">
                 {
                     images && images.map((image) =>
                         <div key={image.bucket_image_id} className="mb-10">
